@@ -1,0 +1,27 @@
+{
+  "name": "cs-controller",
+  "version": "0.1.0",
+  "description": "Serial communication interface for Control Solutions controller products",
+  "main": "cs-controller.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bglase/cs-controller.git"
+  },
+  "author": "Bill Glase",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bglase/cs-controller/issues"
+  },
+  "homepage": "https://github.com/bglase/cs-controller",
+  "dependencies": {
+    "optimist": "^0.6.1",
+    "serialport": "^1.4.10"
+  },
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "mocha": "^2.1.0"
+  }
+}
