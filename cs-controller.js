@@ -14,12 +14,18 @@ var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 var serialPortFactory = require('serialPort');
 
+function MotorController( )
+{
+}
+
+
 function ControllerManager()
 {
     var manager = this;
     
     
     manager.list = serialPortFactory.list;
+    manager.port = serialPortFactory.SerialPort;
     
     manager.usePorts = function( portArray )
     {
@@ -114,10 +120,6 @@ function reconnect(portName, intervalId)
 };
 
 
-
-function MotorController( )
-{
-}
 
 
 
