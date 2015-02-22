@@ -13,19 +13,39 @@ var chai = require('chai');
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 var serialPortFactory = require('serialPort');
+var MotorController = require('./lib/MotorController');
 
-function MotorController( )
-{
-}
 
 
 function ControllerManager()
 {
     var manager = this;
     
+    // Keeps track of all the ports we are managing
+    manager.ports = [];
     
     manager.list = serialPortFactory.list;
     manager.port = serialPortFactory.SerialPort;
+    
+    manager.addPort = function( name, config ) 
+    {
+        // Override defaults with caller's config if any
+        var portConfig = {
+            baudRate: 115200,  dataBits: 8, stopBits: 1, 
+        };
+        
+        for( var prop in config ) {
+            portConfig[prop] = config[prop];
+        }
+        
+        var thePort = new MotorController( name, portConfig, false );
+        manager.ports.push( thePort );
+        
+        return thePort;
+        
+        //setTimeout( function() { console.log("setTimeout: It's been one second!"); }, 5000);
+    }; 
+
     
     manager.usePorts = function( portArray )
     {
