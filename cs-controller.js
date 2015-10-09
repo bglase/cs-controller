@@ -1,17 +1,17 @@
 /**
  * Entry point for Control Solutions Node.js package
- * 
+ *
  * This file exposes the API for communicating via serial port to
  * CS's controller products.
- * 
+ *
  */
 
 /*jslint node: true */
 "use strict";
 
-var chai = require('chai');
+//var chai = require('chai');
 var util = require('util');
-var EventEmitter = require('events').EventEmitter;
+//var EventEmitter = require('events').EventEmitter;
 var serialPortFactory = require('serialPort');
 var MotorController = require('./lib/MotorController');
 
@@ -20,58 +20,59 @@ var MotorController = require('./lib/MotorController');
 function ControllerManager()
 {
     var manager = this;
-    
+
     // Keeps track of all the ports we are managing
     manager.ports = [];
-    
+
     manager.list = serialPortFactory.list;
     manager.port = serialPortFactory.SerialPort;
-    
-    manager.addPort = function( name, config ) 
+
+    manager.addPort = function( name, config )
     {
         // Override defaults with caller's config if any
         var portConfig = {
-            baudRate: 115200,  dataBits: 8, stopBits: 1, 
+            baudRate: 115200,  dataBits: 8, stopBits: 1,
         };
-        
+
         for( var prop in config ) {
             portConfig[prop] = config[prop];
         }
-        
-        var thePort = new MotorController( name, portConfig, false );
-        manager.ports.push( thePort );
-        
-        return thePort;
-        
-        //setTimeout( function() { console.log("setTimeout: It's been one second!"); }, 5000);
-    }; 
 
-    
-    manager.usePorts = function( portArray )
-    {
-      openPort( portArray[0]);
+        var thePort = new MotorController( name, portConfig );
+        manager.ports.push( thePort );
+
+        thePort.open();
+
+        return thePort;
+
     };
-    
+
+
+    //manager.usePorts = function( portArray )
+    //{
+    //  openPort( portArray[0]);
+    //};
+
 }
 
 /**
  * Sets the port(s) that the manager should open, and keep open.
- * 
+ *
  * The manager will attempt to open and initialize the ports supplied in the portArray.
  * If they close (eg disconnected USB cord) the manager will watch them and try to reopen
  * the port if they become available again.
  * Calling this function again updates the set of open ports and cleans up any changes to the list.
- * 
+ *
  * @param portArray array of strings corresponding to the O/S device names
  */
-ControllerManager.prototype.usePorts = function( portArray )
-{
-  openPort( portArray[0]);
-};
-
+//ControllerManager.prototype.usePorts = function( portArray )
+//{
+//  openPort( portArray[0]);
+//};
+/*
 
 //Open a port, hook its events
-function openPort(portName) 
+function openPort(portName)
 {
 
   console.log('opening ' + portName);
@@ -81,12 +82,12 @@ function openPort(portName)
   var data = new Buffer("hello");
   var sendDataIntervalId;
 
-  port.on('disconnected', function() 
+  port.on('disconnected', function()
   {
     clearInterval(sendDataIntervalId);
     console.log('disconnected');
 
-    var intervalId = setInterval(function () 
+    var intervalId = setInterval(function ()
     {
       reconnect(portName, intervalId);
     }, 2000 );
@@ -111,7 +112,7 @@ function openPort(portName)
     }, 200 );
 
   });
-  
+
   port.on('close', function() {
 
       clearInterval(sendDataIntervalId);
@@ -122,7 +123,7 @@ function openPort(portName)
     port.open();
 }
 
-function reconnect(portName, intervalId) 
+function reconnect(portName, intervalId)
 {
     serialPortFactory.list(function(err, ports) {
 
@@ -138,11 +139,11 @@ function reconnect(portName, intervalId)
 
     });
 };
+*/
 
 
 
 
-
-util.inherits(ControllerManager, EventEmitter);
+//util.inherits(ControllerManager, EventEmitter);
 
 module.exports = new ControllerManager();
