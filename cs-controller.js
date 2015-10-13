@@ -7,7 +7,7 @@
  */
 'use strict';
 
-var serialPortFactory = require('serialPort');
+var serialPortFactory = require('serialport');
 var MotorController = require('./lib/MotorController');
 
 
