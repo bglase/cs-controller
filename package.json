@@ -8,15 +8,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/bglase/cs-controller.git"
+    "url": "git://github.com/csllc/cs-controller.git"
   },
   "author": "Bill Glase",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bglase/cs-controller/issues"
+    "url": "https://github.com/csllc/cs-controller/issues"
   },
-  "homepage": "https://github.com/bglase/cs-controller",
+  "homepage": "https://github.com/csllc/cs-controller",
   "dependencies": {
+    "async": "^1.4.2",
     "optimist": "^0.6.1",
     "serialport": "^1.4.10"
   },
