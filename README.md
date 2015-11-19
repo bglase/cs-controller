@@ -8,7 +8,7 @@ A node.js module providing a serial port interface to motor controllers provided
   (optional) start a new nodejs project and put it under version control.  For an example, see https://quickleft.com/blog/creating-and-publishing-a-node-js-module/
 
   Install the cs-controller module:
-  `npm install cs-controller --save`
+  `npm install csllc/cs-controller.git --save`
 
 ## Usage
   Create a file (eg index.js) containing your script commands (refer to examples below).
